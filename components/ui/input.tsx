@@ -1,9 +1,11 @@
 import * as React from "react"
-
 import { cn } from "@/lib/utils"
 
+// Extend InputProps from React.InputHTMLAttributes<HTMLInputElement>
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+    customProp?:string
+  }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
@@ -15,11 +17,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           className
         )}
         ref={ref}
-        {...props}
+        {...props} // Spread all other props to the input element
       />
     )
   }
 )
+
+// Correctly set displayName
 Input.displayName = "Input"
 
 export { Input }
